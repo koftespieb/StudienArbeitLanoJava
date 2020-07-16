@@ -13,6 +13,8 @@ public class ListAllFiles extends ConsoleProgram {
 	private List<String> content = new ArrayList<String>();
 
 	public void run() {
+		setSize(600, 500);
+
 		dir = new File(readLine("Enter directory to scan (e.g. files): "));
 		File[] files = dir.listFiles();
 		for (int i = 0; i < files.length; i++) {
@@ -25,7 +27,8 @@ public class ListAllFiles extends ConsoleProgram {
 		}
 	}
 
-	private void readFileContent(File file) {
+	// reads Content From file and saves it to an ArrayList
+	public void readFileContent(File file) {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			while (true) {
