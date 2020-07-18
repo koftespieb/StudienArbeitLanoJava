@@ -10,38 +10,43 @@ import acm.program.ConsoleProgram;
 public class LongestCommonSubsequence extends ConsoleProgram {
 	List<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
 
-	private List<String> contentFile1 = new ArrayList<String>();
-	private List<String> contentFile2 = new ArrayList<String>();
-
 	public void run() {
-		setSize(600, 500);
+		setSize(1500, 1000);
+		// stürzt ab bei falscher namenseingabe
 		File dir = new File(readLine("Enter directory to scan (e.g. files): "));
 		File[] files = dir.listFiles();
+
 		// creates a ArrayList<String> for every file in dir
 		for (int i = 0; i < files.length; i++) {
 			content.add(new ArrayList<String>());
+			// reads file safed in files[] and safes it to content
+			readFileSaveToList(files[i], content.get(i));
 		}
-		readFileSaveToList(files[0], content.get(0));
-		readFileSaveToList(files[1], content.get(1));
-		/*
-		readFileSaveToList(files[0], contentFile1);
-		readFileSaveToList(files[1], contentFile2);
-		*/
-		String one = "";
-		String two = "";
 
-		for (int i = 0; i < content.get(0).size(); i++) {
-			one += content.get(0).get(i);
-			//one += contentFile1.get(i);
+		output(files);
+
+		String one = content.get(0).toString().toLowerCase();
+		String two = content.get(1).toString().toLowerCase();
+
+		// println(lcs(one, two));
+	}
+
+	private void output(File[] files) {
+		for (int i = 0; i < files.length; i++) {
+			if (i == 0) {
+				print("\t\t|" + files[i].getName() + "|  ");
+			} else {
+				print("  |" + files[i].getName() + "|  ");
+			}
 		}
-		for (int i = 0; i < content.get(1).size(); i++) {
-			two += content.get(1).get(i);
-			// two += contentFile2.get(i);
+		println();
+		for (int i = 0; i < 160; i++) {
+			print("-");
 		}
-		println(one);
-		println("\n");
-		println(two);
-		println(lcs(one, two));
+		println();
+		for (int i = 0; i < files.length; i++) {
+			println(files[i].getName() + "\t|\n");
+		}
 	}
 
 	// returns the accordance of two strings in percent
