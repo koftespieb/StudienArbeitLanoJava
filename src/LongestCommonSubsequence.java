@@ -25,27 +25,35 @@ public class LongestCommonSubsequence extends ConsoleProgram {
 
 		output(files);
 
-		String one = content.get(0).toString().toLowerCase();
-		String two = content.get(1).toString().toLowerCase();
-
-		// println(lcs(one, two));
 	}
 
 	private void output(File[] files) {
+		// for loop to get the top row of the tabble
 		for (int i = 0; i < files.length; i++) {
 			if (i == 0) {
-				print("\t\t|" + files[i].getName() + "|  ");
+				print("\t\t|" + padString(files[i].getName()) + "|");
 			} else {
-				print("  |" + files[i].getName() + "|  ");
+				print("\t|" + padString(files[i].getName()) + "|");
 			}
 		}
 		println();
-		for (int i = 0; i < 160; i++) {
-			print("-");
+		// for loop to get first row underlined
+		for (int i = 0; i < 100; i++) {
+			print("--");
 		}
-		println();
+		println(); // new line
+		// for loop to draw table with values
 		for (int i = 0; i < files.length; i++) {
-			println(files[i].getName() + "\t|\n");
+			for (int j = 0; j <= files.length; j++) {
+				if (j == 0 && i == 0) {
+					print(padString(files[i].getName()) + "\t|");
+				} else if (j == 0 && i != 0) {
+					print(padString(files[i].getName()) + "\t|");
+				} else {
+					print("  " + lcs(content.get(i).toString(), content.get(j - 1).toString()) + "\t\t");
+				}
+			}
+			println(); // new line
 		}
 	}
 
@@ -108,4 +116,18 @@ public class LongestCommonSubsequence extends ConsoleProgram {
 		}
 	}
 
+	// Padds or Cuts a String with spaces until it reaches length L
+	public String padString(String word) {
+		final int L = 11;
+		if (word.length() < L) {
+			while (word.length() < L) {
+				word += " ";
+			}
+			return (word);
+		} else {
+			word = word.substring(0, L);
+			return word;
+		}
+
+	}
 }
