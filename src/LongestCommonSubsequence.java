@@ -8,10 +8,12 @@ import java.util.List;
 import acm.program.ConsoleProgram;
 
 public class LongestCommonSubsequence extends ConsoleProgram {
+	private final int X_SIZE = 1460;
+	private final int Y_SIZE = 600;
 	List<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
 
 	public void run() {
-		setSize(1500, 1000);
+		setSize(X_SIZE, Y_SIZE);
 		// stürzt ab bei falscher namenseingabe
 		File dir = new File(readLine("Enter directory to scan (e.g. files): "));
 		File[] files = dir.listFiles();
