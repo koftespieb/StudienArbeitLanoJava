@@ -17,7 +17,7 @@ public class LongestCommonSubsequence extends ConsoleProgram {
 		// stürzt ab bei falscher namenseingabe
 		File dir = new File(readLine("Enter directory to scan (e.g. files): "));
 		File[] files = dir.listFiles();
-		
+
 		// creates a ArrayList<String> for every file in dir
 		for (int i = 0; i < files.length; i++) {
 			content.add(new ArrayList<String>());
