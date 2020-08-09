@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,22 +8,38 @@ import java.util.List;
 import acm.program.ConsoleProgram;
 
 public class T3 extends ConsoleProgram {
+	private File[] files;
 	private File dir;
 	private List<String> content = new ArrayList<String>();
 
 	public void run() {
 		setSize(600, 500);
+		fillFileArray();
+		if (files != null) {
+			output();
+		} else {
+			println("Please enter vaild directory path");
+		}
+	}
 
-		dir = new File(readLine("Enter directory to scan (e.g. files): "));
-		File[] files = dir.listFiles();
+	private void output() {
+		// Output for File names in the Entered Directory
 		for (int i = 0; i < files.length; i++) {
 			println(i + ": " + files[i].toString());
 			readFileContent(files[i]);
 		}
 		println("\n...................................................\n");
+		// Output for the content of the Files in the Directory
 		for (int i = 0; i < content.size(); i++) {
 			println(content.get(i));
 		}
+
+	}
+
+	// fills the file array with the filenames of the directory Entered
+	private void fillFileArray() {
+		dir = new File(readLine("Enter directory to scan (e.g. files): "));
+		files = dir.listFiles();
 	}
 
 	// reads Content From file and saves it to an ArrayList

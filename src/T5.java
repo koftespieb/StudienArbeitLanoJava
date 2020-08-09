@@ -12,23 +12,31 @@ public class T5 extends ConsoleProgram {
 	private final int X_SIZE = 1460;
 	private final int Y_SIZE = 600;
 	private final String SEPERATION_CHARS = " \n+-*/=<>.;[](){}";
-	List<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
+	private List<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
+	private File dir;
+	private File[] files;
 
 	public void run() {
 		setSize(X_SIZE, Y_SIZE);
-		// stürzt ab bei falscher namenseingabe
-		File dir = new File(readLine("Enter directory to scan (e.g. files): "));
-		File[] files = dir.listFiles();
-		
-		// creates a ArrayList<String> for every file in dir
-		for (int i = 0; i < files.length; i++) {
-			content.add(new ArrayList<String>());
-			// reads file safed in files[] and safes it to content
-			readFileSaveToList(files[i], content.get(i));
+		fillFileArray();
+		if (files != null) {
+			// creates a ArrayList<String> for every file in dirr
+			for (int i = 0; i < files.length; i++) {
+				content.add(new ArrayList<String>());
+				// reads file saved in files[] and safes it to content
+				readFileSaveToList(files[i], content.get(i));
+			}
+			output(files);
+		} else {
+			println("Please enter vaild directory path");
 		}
 
-		output(files);
+	}
 
+	// fills the file array with the filenames of the directory Entered
+	private void fillFileArray() {
+		dir = new File(readLine("Enter directory to scan (e.g. files): "));
+		files = dir.listFiles();
 	}
 
 	private void output(File[] files) {
@@ -136,18 +144,19 @@ public class T5 extends ConsoleProgram {
 		}
 
 	}
-	// Quelle Aufgabenblatt
+
+	// Source Ralph Lano Studienarbeit.pdf
 	private String prepareCode(String s) {
-		StringTokenizer toki = new StringTokenizer(s,SEPERATION_CHARS,true);
+		StringTokenizer toki = new StringTokenizer(s, SEPERATION_CHARS, true);
 		StringBuffer sb = new StringBuffer();
-		while(toki.hasMoreTokens()) {
+		while (toki.hasMoreTokens()) {
 			String token = toki.nextToken();
-			if(SEPERATION_CHARS.contains(token)) {
+			if (SEPERATION_CHARS.contains(token)) {
 				sb.append(token);
-			}else {
+			} else {
 				sb.append("_");
 			}
-			
+
 		}
 		return sb.toString();
 	}

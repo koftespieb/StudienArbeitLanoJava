@@ -1,23 +1,14 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.nio.file.Files;
 
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-import acm.graphics.GCanvas;
-import acm.graphics.GImage;
 import acm.program.Program;
 
 public class T6 extends Program {
@@ -37,14 +28,12 @@ public class T6 extends Program {
 		setSize(900, 700);
 		setupFilePickerComboBoxen();
 		setupTextAreas();
-
 	}
 
 	private void setupTextAreas() {
 		add(panel, CENTER);
 		panel.add(pane1);
 		panel.add(pane2);
-		
 
 	}
 
@@ -57,9 +46,7 @@ public class T6 extends Program {
 		filePicker1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					if (filePicker1.getSelectedItem() != "Choose") {
-						openFile(filePicker1.getSelectedItem().toString(), area1);
-					}
+					openFile(filePicker1.getSelectedItem().toString(), area1);
 				}
 
 			}
@@ -67,9 +54,7 @@ public class T6 extends Program {
 		filePicker2.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					if (filePicker1.getSelectedItem() != "Choose") {
-						openFile(filePicker2.getSelectedItem().toString(), area2);
-					}
+					openFile(filePicker2.getSelectedItem().toString(), area2);
 				}
 
 			}
@@ -78,6 +63,7 @@ public class T6 extends Program {
 		add(filePicker2, NORTH);
 
 	}
+
 	// Opens a file, saves it in a String var and displays it on a JTextArea
 	private void openFile(String fileName, JTextArea area) {
 		try {

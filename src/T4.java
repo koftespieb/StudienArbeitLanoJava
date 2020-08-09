@@ -10,23 +10,32 @@ import acm.program.ConsoleProgram;
 public class T4 extends ConsoleProgram {
 	private final int X_SIZE = 1460;
 	private final int Y_SIZE = 600;
-	List<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
+	private List<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
+	private File dir;
+	private File[] files;
 
 	public void run() {
 		setSize(X_SIZE, Y_SIZE);
-		// stürzt ab bei falscher namenseingabe
-		File dir = new File(readLine("Enter directory to scan (e.g. files): "));
-		File[] files = dir.listFiles();
-		
-		// creates a ArrayList<String> for every file in dir
-		for (int i = 0; i < files.length; i++) {
-			content.add(new ArrayList<String>());
-			// reads file safed in files[] and safes it to content
-			readFileSaveToList(files[i], content.get(i));
+		fillFileArray();
+		if (files != null) {
+			// creates a ArrayList<String> for every file in dir
+			for (int i = 0; i < files.length; i++) {
+				content.add(new ArrayList<String>());
+				// reads file saved in files[] and safes it to content
+				readFileSaveToList(files[i], content.get(i));
+			}
+			output(files);
+
+		} else {
+			println("Please enter vaild directory path");
 		}
 
-		output(files);
+	}
 
+	// fills the file array with the filenames of the directory Entered
+	private void fillFileArray() {
+		dir = new File(readLine("Enter directory to scan (e.g. files): "));
+		files = dir.listFiles();
 	}
 
 	private void output(File[] files) {
@@ -43,7 +52,7 @@ public class T4 extends ConsoleProgram {
 		for (int i = 0; i < 100; i++) {
 			print("--");
 		}
-		println(); // new line
+		println();
 		// for loop to draw table with values
 		for (int i = 0; i < files.length; i++) {
 			for (int j = 0; j <= files.length; j++) {
@@ -59,6 +68,8 @@ public class T4 extends ConsoleProgram {
 		}
 	}
 
+	// source
+	// https://www.geeksforgeeks.org/java-program-for-longest-common-subsequence/
 	// returns the accordance of two strings in percent
 	public int lcs(String s1, String s2) {
 		char[] X = s1.toCharArray();
@@ -119,6 +130,7 @@ public class T4 extends ConsoleProgram {
 	}
 
 	// Padds or Cuts a String with spaces until it reaches length L
+	// Needed for better output
 	public String padString(String word) {
 		final int L = 11;
 		if (word.length() < L) {
