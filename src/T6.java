@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.io.FileReader;
 import java.nio.file.Files;
 
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -18,26 +20,40 @@ import acm.graphics.GCanvas;
 import acm.graphics.GImage;
 import acm.program.Program;
 
-public class Diff extends Program {
+public class T6 extends Program {
 	private File dir = new File("files");
-	File[] files = dir.listFiles();
-	JComboBox filePicker1;
-	JComboBox filePicker2;
+	private File[] files = dir.listFiles();
+	private JComboBox filePicker1;
+	private JComboBox filePicker2;
 
-	JPanel panel = new JPanel();
-	JTextArea area1 = new JTextArea(25, 25);
-	JTextArea area2 = new JTextArea(25, 25);
+	private JPanel panel = new JPanel();
+	private JTextArea area1 = new JTextArea(39, 36);
+	private JTextArea area2 = new JTextArea(39, 36);
 
-	JScrollPane pane1 = new JScrollPane(area1);
-	JScrollPane pane2 = new JScrollPane(area2);
+	private JScrollPane pane1 = new JScrollPane(area1);
+	private JScrollPane pane2 = new JScrollPane(area2);
 
 	public void init() {
-		setSize(700, 550);
-		filePicker1 = new JComboBox(files);
-		filePicker2 = new JComboBox(files);
+		setSize(900, 700);
+		setupFilePickerComboBoxen();
+		setupTextAreas();
+
+	}
+
+	private void setupTextAreas() {
+		add(panel, CENTER);
+		panel.add(pane1);
+		panel.add(pane2);
 		
 
+	}
+
+	private void setupFilePickerComboBoxen() {
+		filePicker1 = new JComboBox(files);
+		filePicker2 = new JComboBox(files);
 		// Quelle für ItemListeners: https://www.youtube.com/watch?v=lPJFg7BnVHk
+		// if a new file gets selected via comboBox, the content of this file will be
+		// displayed in the text Area
 		filePicker1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -58,17 +74,12 @@ public class Diff extends Program {
 
 			}
 		});
-
-		add(panel, CENTER);
 		add(filePicker1, NORTH);
 		add(filePicker2, NORTH);
-		panel.add(pane1);
-		panel.add(pane2);
 
 	}
-
+	// Opens a file, saves it in a String var and displays it on a JTextArea
 	private void openFile(String fileName, JTextArea area) {
-
 		try {
 			// open file
 			FileReader fr = new FileReader(fileName);

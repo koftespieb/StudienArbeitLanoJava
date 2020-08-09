@@ -4,14 +4,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import acm.program.ConsoleProgram;
 
-public class Rename extends ConsoleProgram {
+public class T4 extends ConsoleProgram {
 	private final int X_SIZE = 1460;
 	private final int Y_SIZE = 600;
-	private final String SEPERATION_CHARS = " \n+-*/=<>.;[](){}";
 	List<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
 
 	public void run() {
@@ -62,9 +60,7 @@ public class Rename extends ConsoleProgram {
 	}
 
 	// returns the accordance of two strings in percent
-	public int lcs(String inpud1, String inpud2) {
-		String s1 = prepareCode(inpud1);
-		String s2 = prepareCode(inpud2);
+	public int lcs(String s1, String s2) {
 		char[] X = s1.toCharArray();
 		char[] Y = s2.toCharArray();
 		int m = X.length;
@@ -135,20 +131,5 @@ public class Rename extends ConsoleProgram {
 			return word;
 		}
 
-	}
-	// Quelle Aufgabenblatt
-	private String prepareCode(String s) {
-		StringTokenizer toki = new StringTokenizer(s,SEPERATION_CHARS,true);
-		StringBuffer sb = new StringBuffer();
-		while(toki.hasMoreTokens()) {
-			String token = toki.nextToken();
-			if(SEPERATION_CHARS.contains(token)) {
-				sb.append(token);
-			}else {
-				sb.append("_");
-			}
-			
-		}
-		return sb.toString();
 	}
 }

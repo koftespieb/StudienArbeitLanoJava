@@ -11,8 +11,8 @@ import acm.graphics.GRect;
 import acm.io.IODialog;
 import acm.program.GraphicsProgram;
 
-public class DotPlot extends GraphicsProgram {
-	private static final double BLOCK_SIZE = 0.09;
+public class T7 extends GraphicsProgram {
+	private static final double BLOCK_SIZE = 0.06;
 	private final String SEPERATION_CHARS = " \n+-*/=<>.;[](){}";
 	List<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
 
@@ -57,11 +57,14 @@ public class DotPlot extends GraphicsProgram {
 						}
 					}
 					if (count == lengthOfSameChars) {
-						GRect pixel = new GRect(BLOCK_SIZE, BLOCK_SIZE);
-						pixel.setFilled(false);
-						pixel.setColor(Color.DARK_GRAY);
-						add(pixel, (i-count) * BLOCK_SIZE + x_off, (j-count) * BLOCK_SIZE + y_off);
-						count = 0;
+						for (int j2 = 0; j2 < lengthOfSameChars; j2++) {
+							GRect pixel = new GRect(BLOCK_SIZE, BLOCK_SIZE);
+							pixel.setFilled(true);
+							pixel.setColor(Color.DARK_GRAY);
+							add(pixel, (i+j2) * BLOCK_SIZE + x_off, (j+j2) * BLOCK_SIZE + y_off);
+							count = 0;
+						}
+						
 					}
 				} else {
 					count = 0;

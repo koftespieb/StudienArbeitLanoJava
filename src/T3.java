@@ -8,7 +8,7 @@ import java.util.List;
 
 import acm.program.ConsoleProgram;
 
-public class ListAllFiles extends ConsoleProgram {
+public class T3 extends ConsoleProgram {
 	private File dir;
 	private List<String> content = new ArrayList<String>();
 
